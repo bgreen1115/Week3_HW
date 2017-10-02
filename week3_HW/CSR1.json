@@ -1,0 +1,14 @@
+{
+    "fqdn": "CSR1.test.com", 
+    "hostname": "CSR1", 
+    "interface_list": [
+        "GigabitEthernet1", 
+        "GigabitEthernet2", 
+        "GigabitEthernet3"
+    ], 
+    "model": "CSR1000V", 
+    "os_version": "CSR1000V Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 16.4.2, RELEASE SOFTWARE (fc1)", 
+    "serial_number": "9OBFJ4ZZR3D", 
+    "uptime": 1105020, 
+    "vendor": "Cisco"
+}

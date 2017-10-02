@@ -1,0 +1,21 @@
+{% for host in groups['juniper'] %}
+
+Model:  {{hostvars[host].juniper_result.ansible_facts.napalm_facts.model}}       
+Vendor:  {{hostvars[host].juniper_result.ansible_facts.napalm_facts.vendor}}    
+Hostname:  {{hostvars[host].juniper_result.ansible_facts.napalm_facts.hostname}}        
+Serial #:  {{hostvars[host].juniper_result.ansible_facts.napalm_facts.serial_number}}         
+Uptime:  {{hostvars[host].juniper_result.ansible_facts.napalm_facts.uptime}}  
+OS:  {{hostvars[host].juniper_result.ansible_facts.napalm_facts.os_version}}
+
+{% endfor %}
+{% for host in groups['cisco'] %}
+
+Model:  {{hostvars[host].cisco_result.ansible_facts.napalm_facts.model}}       
+Vendor:  {{hostvars[host].cisco_result.ansible_facts.napalm_facts.vendor}}    
+Hostname:  {{hostvars[host].cisco_result.ansible_facts.napalm_facts.hostname}}        
+Serial #:  {{hostvars[host].cisco_result.ansible_facts.napalm_facts.serial_number}}         
+Uptime:  {{hostvars[host].cisco_result.ansible_facts.napalm_facts.uptime}}  
+OS:  {{hostvars[host].cisco_result.ansible_facts.napalm_facts.os_version}}
+
+{% endfor %}
+
