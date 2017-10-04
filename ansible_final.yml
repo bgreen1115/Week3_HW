@@ -1,0 +1,46 @@
+---
+- name: test NAPALM-Ansible on Juniper
+  hosts: juniper
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Verify Juniper Netconf
+      wait_for:
+        host={{ ansible_ssh_host }}
+        port=830
+
+    - name: get facts from Juniper device
+      napalm_get_facts:
+        hostname: "{{ ansible_ssh_host }}"
+        username: "{{ juniper_user }}"
+        password: "{{ juniper_password }}"
+        dev_os: "junos"
+        filter: 
+          - 'facts'
+      register: juniper_result
+
+    - name: Copy juniper_result to local file (one file per device)
+      local_action: copy content="{{ juniper_result.ansible_facts.napalm_facts|to_nice_json }}" dest=~/{{inventory_hostname}}.json     
+
+- name: Test NAPALM-Ansible on Cisco hosts
+  hosts: cisco
+  connection: local
+
+  tasks:
+    - name: get facts from Cisco device
+      napalm_get_facts:
+        hostname: "{{host}}"
+        username: "{{username}}"
+        password: "{{password}}"
+        dev_os: "{{dev_os}}"
+      register: cisco_result
+
+    - name: Copy cisco_result to local file (one file per device)
+      local_action: copy content="{{ cisco_result.ansible_facts.napalm_facts|to_nice_json }}" dest=~/{{inventory_hostname}}.json     
+
+
+    - name: Output facts data via template
+      template:
+        src: ~/Device_template.j2
+        dest: ~/Facts_output.txt
